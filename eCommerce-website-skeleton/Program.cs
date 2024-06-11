@@ -1,7 +1,18 @@
+using eCommerce_website_skeleton.Data;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
+// added at section 4.13 
+var connectionString = builder.Configuration.GetConnectionString("DefaultconnectionString");
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
+
+
 
 var app = builder.Build();
 
@@ -23,5 +34,8 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+// initialise database of the app.
+AppDbInitialiser.seed(app);
 
 app.Run();
