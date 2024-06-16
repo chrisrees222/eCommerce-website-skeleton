@@ -8,56 +8,55 @@ namespace eCommerce_website_skeleton.Data
 {
     public class AppDbInitialiser
     {
-        public static void seed(IApplicationBuilder applicationBuilder)
+        public static void Seed(IApplicationBuilder applicationBuilder)
         {
-            using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
+            using var serviceScope = applicationBuilder.ApplicationServices.CreateScope();
+            var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
+
+            context.Database.EnsureCreated();
+
+            //Cinema
+            if (!context.Cinemas.Any())
             {
-                var context = serviceScope.ServiceProvider.GetService<AppDbContext>(); 
-
-                context.Database.EnsureCreated();
-
-                //Cinema
-                if (!context.Cinemas.Any())
-                {
-                    context.Cinemas.AddRange(new List<Cinema>()
+                context.Cinemas.AddRange(new List<Cinema>()
                     {
                         new Cinema()
                         {
                             Name = "Cinema 1",
                             Logo = "http://dotnethow.net/images/cinemas/cinema-1.jpeg",
-                            description = "This is the description of the first cinema"
+                            Description = "This is the description of the first cinema"
                         },
                         new Cinema()
                         {
                             Name = "Cinema 2",
                             Logo = "http://dotnethow.net/images/cinemas/cinema-2.jpeg",
-                            description = "This is the description of the first cinema"
+                            Description = "This is the description of the first cinema"
                         },
                         new Cinema()
                         {
                             Name = "Cinema 3",
                             Logo = "http://dotnethow.net/images/cinemas/cinema-3.jpeg",
-                            description = "This is the description of the first cinema"
+                            Description = "This is the description of the first cinema"
                         },
                         new Cinema()
                         {
                             Name = "Cinema 4",
                             Logo = "http://dotnethow.net/images/cinemas/cinema-4.jpeg",
-                            description = "This is the description of the first cinema"
+                            Description = "This is the description of the first cinema"
                         },
                         new Cinema()
                         {
                             Name = "Cinema 5",
                             Logo = "http://dotnethow.net/images/cinemas/cinema-5.jpeg",
-                            description = "This is the description of the first cinema"
+                            Description = "This is the description of the first cinema"
                         },
                     });
-                    context.SaveChanges();
-                }
-                //Actors
-                if (!context.Actors.Any())
-                {
-                    context.Actors.AddRange(new List<Actors>()
+                context.SaveChanges();
+            }
+            //Actors
+            if (!context.Actors.Any())
+            {
+                context.Actors.AddRange(new List<Actors>()
                     {
                         new Actors()
                         {
@@ -91,12 +90,12 @@ namespace eCommerce_website_skeleton.Data
                             ProfilePictureURL = "http://dotnethow.net/images/actors/actor-5.jpeg"
                         }
                     });
-                    context.SaveChanges();
-                }
-                //Producers
-                if (!context.Producers.Any())
-                {
-                    context.Producers.AddRange(new List<Producer>()
+                context.SaveChanges();
+            }
+            //Producers
+            if (!context.Producers.Any())
+            {
+                context.Producers.AddRange(new List<Producer>()
                     {
                         new Producer()
                         {
@@ -130,12 +129,12 @@ namespace eCommerce_website_skeleton.Data
                             ProfilePictureURL = "http://dotnethow.net/images/producers/producer-5.jpeg"
                         }
                     });
-                    context.SaveChanges();
-                }
-                //Movies
-                if (!context.Movies.Any())
-                {
-                    context.Movies.AddRange(new List<Movie>()
+                context.SaveChanges();
+            }
+            //Movies
+            if (!context.Movies.Any())
+            {
+                context.Movies.AddRange(new List<Movie>()
                     {
                         new Movie()
                         {
@@ -210,12 +209,12 @@ namespace eCommerce_website_skeleton.Data
                             MovieCatergory = MovieCatergory.Drama
                         }
                     });
-                    context.SaveChanges();
-                }
-                //Actors & Movies
-                if (!context.Actor_Movies.Any())
-                {
-                    context.Actor_Movies.AddRange(new List<Actor_Movie>()
+                context.SaveChanges();
+            }
+            //Actors & Movies
+            if (!context.Actor_Movies.Any())
+            {
+                context.Actor_Movies.AddRange(new List<Actor_Movie>()
                     {
                         new Actor_Movie()
                         {
@@ -311,8 +310,7 @@ namespace eCommerce_website_skeleton.Data
                             MovieId = 6
                         },
                     });
-                    context.SaveChanges();
-                }
+                context.SaveChanges();
             }
 
         }
