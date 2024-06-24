@@ -1,4 +1,5 @@
 using eCommerce_website_skeleton.Data;
+using eCommerce_website_skeleton.Data.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +8,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+//IActorServices included from sect 8.
+builder.Services.AddScoped<IActorsService, ActorsService>();
+builder.Services.AddScoped <IProducersServices, ProducersServices>();
+builder.Services.AddScoped<ICinemaservice, CinemaService>();
+builder.Services.AddScoped<IMoviesService, MoviesService>();
 
 // added at section 4.13 
 var connectionString = builder.Configuration.GetConnectionString("DefaultconnectionString");

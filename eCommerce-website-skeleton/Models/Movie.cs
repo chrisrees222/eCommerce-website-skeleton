@@ -1,10 +1,11 @@
-﻿using eCommerce_website_skeleton.Data.Enums;
+﻿using eCommerce_website_skeleton.Data.Base;
+using eCommerce_website_skeleton.Data.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace eCommerce_website_skeleton.Models
 {
-    public class Movie
+    public class Movie : IEntityBase
     {
         [Key]
         public int Id { get; set; }
