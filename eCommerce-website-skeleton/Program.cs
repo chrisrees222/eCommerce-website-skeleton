@@ -1,4 +1,5 @@
 using eCommerce_website_skeleton.Data;
+using eCommerce_website_skeleton.Data.Cart;
 using eCommerce_website_skeleton.Data.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,12 @@ builder.Services.AddScoped<IActorsService, ActorsService>();
 builder.Services.AddScoped <IProducersServices, ProducersServices>();
 builder.Services.AddScoped<ICinemaservice, CinemaService>();
 builder.Services.AddScoped<IMoviesService, MoviesService>();
+builder.Services.AddScoped<IOrderService, _ordersService>();
+
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
+
+builder.Services.AddSession();
 
 // added at section 4.13 
 var connectionString = builder.Configuration.GetConnectionString("DefaultconnectionString");
@@ -34,6 +41,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseSession();   
 
 app.UseAuthorization();
 
